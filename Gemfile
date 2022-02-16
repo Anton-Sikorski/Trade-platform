@@ -36,11 +36,11 @@ gem "hotwire-rails"
 
 gem "fx"
 
-gem "device"
+gem "devise"
 
 gem "activeadmin"
 
-gem "pundit"
+gem "cancancan"
 
 gem "ransack"
 

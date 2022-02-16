@@ -9,7 +9,8 @@
 
 [Bed, Pillow, Table].each do |product|
   10.times do
-    b = product.new(size: Faker::Lorem.word, color: Faker::Lorem.word, material: Faker::Lorem.word)
+    size = rand(100000..1000000).to_s.gsub /(\d{2})(\d{2})(\d{2})/, '\1x\2x\3'
+    b = product.new(size: size, color: Faker::Lorem.word, material: Faker::Lorem.word)
     b.save
     p = Product.new(title: Faker::Lorem.word, :content => b,
                 price: Faker::Number.decimal, description: Faker::Lorem.sentence)

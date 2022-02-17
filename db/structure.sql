@@ -415,6 +415,77 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: active_admin_comments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.active_admin_comments (
+    id bigint NOT NULL,
+    namespace character varying,
+    body text,
+    resource_type character varying,
+    resource_id bigint,
+    author_type character varying,
+    author_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: active_admin_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.active_admin_comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: active_admin_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.active_admin_comments_id_seq OWNED BY public.active_admin_comments.id;
+
+
+--
+-- Name: admin_users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.admin_users (
+    id bigint NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: admin_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.admin_users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: admin_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.admin_users_id_seq OWNED BY public.admin_users.id;
+
+
+--
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -427,22 +498,23 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
--- Name: beds; Type: TABLE; Schema: public; Owner: -
+-- Name: attribute_values; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.beds (
+CREATE TABLE public.attribute_values (
     id bigint NOT NULL,
-    size character varying,
-    color character varying,
-    material character varying
+    value character varying,
+    attribute_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
 --
--- Name: beds_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: attribute_values_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.beds_id_seq
+CREATE SEQUENCE public.attribute_values_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -451,29 +523,28 @@ CREATE SEQUENCE public.beds_id_seq
 
 
 --
--- Name: beds_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: attribute_values_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.beds_id_seq OWNED BY public.beds.id;
+ALTER SEQUENCE public.attribute_values_id_seq OWNED BY public.attribute_values.id;
 
 
 --
--- Name: pillows; Type: TABLE; Schema: public; Owner: -
+-- Name: attributes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.pillows (
+CREATE TABLE public.attributes (
     id bigint NOT NULL,
-    size character varying,
-    color character varying,
-    material character varying
+    name character varying,
+    product_id bigint NOT NULL
 );
 
 
 --
--- Name: pillows_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: attributes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.pillows_id_seq
+CREATE SEQUENCE public.attributes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -482,10 +553,10 @@ CREATE SEQUENCE public.pillows_id_seq
 
 
 --
--- Name: pillows_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: attributes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.pillows_id_seq OWNED BY public.pillows.id;
+ALTER SEQUENCE public.attributes_id_seq OWNED BY public.attributes.id;
 
 
 --
@@ -494,11 +565,9 @@ ALTER SEQUENCE public.pillows_id_seq OWNED BY public.pillows.id;
 
 CREATE TABLE public.products (
     id bigint NOT NULL,
-    title character varying,
     price double precision,
-    description text,
-    content_type character varying,
-    content_id bigint,
+    title character varying,
+    category character varying,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -533,48 +602,31 @@ CREATE TABLE public.schema_migrations (
 
 
 --
--- Name: tables; Type: TABLE; Schema: public; Owner: -
+-- Name: active_admin_comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-CREATE TABLE public.tables (
-    id bigint NOT NULL,
-    size character varying,
-    color character varying,
-    material character varying
-);
+ALTER TABLE ONLY public.active_admin_comments ALTER COLUMN id SET DEFAULT nextval('public.active_admin_comments_id_seq'::regclass);
 
 
 --
--- Name: tables_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: admin_users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.tables_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+ALTER TABLE ONLY public.admin_users ALTER COLUMN id SET DEFAULT nextval('public.admin_users_id_seq'::regclass);
 
 
 --
--- Name: tables_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: attribute_values id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.tables_id_seq OWNED BY public.tables.id;
-
-
---
--- Name: beds id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.beds ALTER COLUMN id SET DEFAULT nextval('public.beds_id_seq'::regclass);
+ALTER TABLE ONLY public.attribute_values ALTER COLUMN id SET DEFAULT nextval('public.attribute_values_id_seq'::regclass);
 
 
 --
--- Name: pillows id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: attributes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.pillows ALTER COLUMN id SET DEFAULT nextval('public.pillows_id_seq'::regclass);
+ALTER TABLE ONLY public.attributes ALTER COLUMN id SET DEFAULT nextval('public.attributes_id_seq'::regclass);
 
 
 --
@@ -585,10 +637,19 @@ ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.pro
 
 
 --
--- Name: tables id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: active_admin_comments active_admin_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.tables ALTER COLUMN id SET DEFAULT nextval('public.tables_id_seq'::regclass);
+ALTER TABLE ONLY public.active_admin_comments
+    ADD CONSTRAINT active_admin_comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: admin_users admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admin_users
+    ADD CONSTRAINT admin_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -600,19 +661,19 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
--- Name: beds beds_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: attribute_values attribute_values_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.beds
-    ADD CONSTRAINT beds_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.attribute_values
+    ADD CONSTRAINT attribute_values_pkey PRIMARY KEY (id);
 
 
 --
--- Name: pillows pillows_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: attributes attributes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.pillows
-    ADD CONSTRAINT pillows_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.attributes
+    ADD CONSTRAINT attributes_pkey PRIMARY KEY (id);
 
 
 --
@@ -632,18 +693,68 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
--- Name: tables tables_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: index_active_admin_comments_on_author; Type: INDEX; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.tables
-    ADD CONSTRAINT tables_pkey PRIMARY KEY (id);
+CREATE INDEX index_active_admin_comments_on_author ON public.active_admin_comments USING btree (author_type, author_id);
 
 
 --
--- Name: index_products_on_content; Type: INDEX; Schema: public; Owner: -
+-- Name: index_active_admin_comments_on_namespace; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_products_on_content ON public.products USING btree (content_type, content_id);
+CREATE INDEX index_active_admin_comments_on_namespace ON public.active_admin_comments USING btree (namespace);
+
+
+--
+-- Name: index_active_admin_comments_on_resource; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_active_admin_comments_on_resource ON public.active_admin_comments USING btree (resource_type, resource_id);
+
+
+--
+-- Name: index_admin_users_on_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_admin_users_on_email ON public.admin_users USING btree (email);
+
+
+--
+-- Name: index_admin_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_admin_users_on_reset_password_token ON public.admin_users USING btree (reset_password_token);
+
+
+--
+-- Name: index_attribute_values_on_attribute_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_attribute_values_on_attribute_id ON public.attribute_values USING btree (attribute_id);
+
+
+--
+-- Name: index_attributes_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_attributes_on_product_id ON public.attributes USING btree (product_id);
+
+
+--
+-- Name: attribute_values fk_rails_74f16abc60; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.attribute_values
+    ADD CONSTRAINT fk_rails_74f16abc60 FOREIGN KEY (attribute_id) REFERENCES public.attributes(id);
+
+
+--
+-- Name: attributes fk_rails_bd0d4debc1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.attributes
+    ADD CONSTRAINT fk_rails_bd0d4debc1 FOREIGN KEY (product_id) REFERENCES public.products(id);
 
 
 --
@@ -655,9 +766,10 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20220210070319'),
 ('20220210070320'),
-('20220216091112'),
-('20220216091355'),
-('20220216091720'),
-('20220216091900');
+('20220216124629'),
+('20220216124631'),
+('20220216124848'),
+('20220216124905'),
+('20220216135030');
 
 

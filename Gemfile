@@ -60,7 +60,7 @@ group :development, :test do
   gem "database_cleaner"
   gem "factory_bot"
   gem "faker"
-  gem "rspec"
+  gem "rspec-rails"
   gem "shoulda-matchers"
   gem "simplecov"
 end

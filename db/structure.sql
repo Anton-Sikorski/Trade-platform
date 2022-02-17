@@ -498,23 +498,22 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
--- Name: attribute_values; Type: TABLE; Schema: public; Owner: -
+-- Name: categories; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.attribute_values (
+CREATE TABLE public.categories (
     id bigint NOT NULL,
-    value character varying,
-    attribute_id bigint NOT NULL,
+    title character varying NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
 
 
 --
--- Name: attribute_values_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.attribute_values_id_seq
+CREATE SEQUENCE public.categories_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -523,28 +522,60 @@ CREATE SEQUENCE public.attribute_values_id_seq
 
 
 --
--- Name: attribute_values_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.attribute_values_id_seq OWNED BY public.attribute_values.id;
+ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
 
 
 --
--- Name: attributes; Type: TABLE; Schema: public; Owner: -
+-- Name: feature_values; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.attributes (
+CREATE TABLE public.feature_values (
     id bigint NOT NULL,
-    name character varying,
+    value character varying NOT NULL,
+    feature_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: feature_values_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.feature_values_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: feature_values_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.feature_values_id_seq OWNED BY public.feature_values.id;
+
+
+--
+-- Name: features; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.features (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
     product_id bigint NOT NULL
 );
 
 
 --
--- Name: attributes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: features_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.attributes_id_seq
+CREATE SEQUENCE public.features_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -553,10 +584,10 @@ CREATE SEQUENCE public.attributes_id_seq
 
 
 --
--- Name: attributes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: features_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.attributes_id_seq OWNED BY public.attributes.id;
+ALTER SEQUENCE public.features_id_seq OWNED BY public.features.id;
 
 
 --
@@ -565,11 +596,11 @@ ALTER SEQUENCE public.attributes_id_seq OWNED BY public.attributes.id;
 
 CREATE TABLE public.products (
     id bigint NOT NULL,
-    price double precision,
-    title character varying,
-    category character varying,
+    price double precision NOT NULL,
+    title character varying NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    category_id bigint NOT NULL
 );
 
 
@@ -616,17 +647,24 @@ ALTER TABLE ONLY public.admin_users ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
--- Name: attribute_values id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: categories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.attribute_values ALTER COLUMN id SET DEFAULT nextval('public.attribute_values_id_seq'::regclass);
+ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.categories_id_seq'::regclass);
 
 
 --
--- Name: attributes id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: feature_values id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.attributes ALTER COLUMN id SET DEFAULT nextval('public.attributes_id_seq'::regclass);
+ALTER TABLE ONLY public.feature_values ALTER COLUMN id SET DEFAULT nextval('public.feature_values_id_seq'::regclass);
+
+
+--
+-- Name: features id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.features ALTER COLUMN id SET DEFAULT nextval('public.features_id_seq'::regclass);
 
 
 --
@@ -661,19 +699,27 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
--- Name: attribute_values attribute_values_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.attribute_values
-    ADD CONSTRAINT attribute_values_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.categories
+    ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
 
 
 --
--- Name: attributes attributes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: feature_values feature_values_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.attributes
-    ADD CONSTRAINT attributes_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.feature_values
+    ADD CONSTRAINT feature_values_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: features features_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.features
+    ADD CONSTRAINT features_pkey PRIMARY KEY (id);
 
 
 --
@@ -728,33 +774,48 @@ CREATE UNIQUE INDEX index_admin_users_on_reset_password_token ON public.admin_us
 
 
 --
--- Name: index_attribute_values_on_attribute_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_feature_values_on_feature_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_attribute_values_on_attribute_id ON public.attribute_values USING btree (attribute_id);
-
-
---
--- Name: index_attributes_on_product_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_attributes_on_product_id ON public.attributes USING btree (product_id);
+CREATE INDEX index_feature_values_on_feature_id ON public.feature_values USING btree (feature_id);
 
 
 --
--- Name: attribute_values fk_rails_74f16abc60; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: index_features_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.attribute_values
-    ADD CONSTRAINT fk_rails_74f16abc60 FOREIGN KEY (attribute_id) REFERENCES public.attributes(id);
+CREATE INDEX index_features_on_product_id ON public.features USING btree (product_id);
 
 
 --
--- Name: attributes fk_rails_bd0d4debc1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: index_products_on_category_id; Type: INDEX; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.attributes
-    ADD CONSTRAINT fk_rails_bd0d4debc1 FOREIGN KEY (product_id) REFERENCES public.products(id);
+CREATE INDEX index_products_on_category_id ON public.products USING btree (category_id);
+
+
+--
+-- Name: features fk_rails_928d8ad7d3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.features
+    ADD CONSTRAINT fk_rails_928d8ad7d3 FOREIGN KEY (product_id) REFERENCES public.products(id);
+
+
+--
+-- Name: feature_values fk_rails_f48bece590; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.feature_values
+    ADD CONSTRAINT fk_rails_f48bece590 FOREIGN KEY (feature_id) REFERENCES public.features(id);
+
+
+--
+-- Name: products fk_rails_fb915499a4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT fk_rails_fb915499a4 FOREIGN KEY (category_id) REFERENCES public.categories(id);
 
 
 --
@@ -764,12 +825,14 @@ ALTER TABLE ONLY public.attributes
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20220210070319'),
-('20220210070320'),
 ('20220216124629'),
 ('20220216124631'),
 ('20220216124848'),
-('20220216124905'),
-('20220216135030');
+('20220217113311'),
+('20220217114458'),
+('20220217114633'),
+('20220217115654'),
+('20220217121329'),
+('20220217121409');
 
 

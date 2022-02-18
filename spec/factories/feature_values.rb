@@ -18,8 +18,10 @@
 #
 #  fk_rails_...  (feature_id => features.id)
 #
-class FeatureValue < ApplicationRecord
-  belongs_to :feature
+FactoryBot.define do
+  factory :feature_value do
+    feature_id { FactoryBot.create(:feature).id }
 
-  validates :value, presence: true, uniqueness: true, length: { minimum: 2 }
+    value { Faker::Lorem.word }
+  end
 end

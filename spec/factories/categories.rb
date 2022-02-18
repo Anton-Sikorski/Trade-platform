@@ -9,7 +9,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Category < ApplicationRecord
-  has_many :products, dependent: :destroy
-  validates :title, presence: true, uniqueness: true, length: { minimum: 2 }
+FactoryBot.define do
+  factory :category do
+    title { Faker::Lorem.word }
+  end
 end

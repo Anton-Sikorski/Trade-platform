@@ -19,5 +19,27 @@
 require "rails_helper"
 
 RSpec.describe Feature, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe ".create" do
+    context "with valid attributes" do
+      include_examples "creates_object_for", :feature
+    end
+
+    context "with invalid attributes" do
+      context "with too short title" do
+        include_examples "not_create_object_for", :feature, name: "a"
+      end
+
+      context "with repeating title" do
+        before { create(:feature, name: "test") }
+
+        include_examples "not_create_object_for", :feature, name: "test"
+      end
+    end
+
+    context "with missing attributes" do
+      context "with missing title" do
+        include_examples "not_create_object_for", :feature, name: nil
+      end
+    end
+  end
 end

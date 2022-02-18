@@ -16,9 +16,9 @@
 #
 #  fk_rails_...  (product_id => products.id)
 #
-class Feature < ApplicationRecord
-  belongs_to :product
-  has_one :feature_value, dependent: :destroy
-
-  validates :name, presence: true, uniqueness: true, length: { minimum: 2 }
+FactoryBot.define do
+  factory :feature do
+    product { FactoryBot.create(:product) }
+    name { Faker::Lorem.word }
+  end
 end

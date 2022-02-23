@@ -11,6 +11,6 @@
 #
 FactoryBot.define do
   factory :category do
-    title { Faker::Lorem.word }
+    title { Faker::Lorem.sentence }
   end
 end

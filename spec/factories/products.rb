@@ -19,10 +19,10 @@
 #
 #  fk_rails_...  (category_id => categories.id)
 #
-class Product < ApplicationRecord
-  belongs_to :category
-  has_many :features, dependent: :destroy
-
-  validates :title, presence: true, uniqueness: true, length: { minimum: 2 }
-  validates :price, presence: true, numericality: { greater_than: 0 }
+FactoryBot.define do
+  factory :product do
+    category { FactoryBot.create(:category) }
+    title { Faker::Lorem.word }
+    price { Faker::Number.decimal }
+  end
 end

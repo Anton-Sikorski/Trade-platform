@@ -1,0 +1,27 @@
+// Place all the styles related to the Category controller here.
+// They will automatically be included in application.scss.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.content{
+  min-width: 60vw;
+}
+
+.container-sidebar{
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar{
+  max-height: 10vh;
+  min-width: 20vw;
+  top: 0.5em;
+  position: sticky;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns:  49vw 49vw ;
+  grid-gap: 1rem;
+  color: #444;
+  justify-content: center
+}

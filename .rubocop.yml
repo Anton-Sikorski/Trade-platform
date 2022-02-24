@@ -39,6 +39,12 @@ Metrics/AbcSize:
 RSpec/ExampleLength:
   Max: 10
 
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
 # Prefer &&/|| over and/or.
 Style/AndOr:
   Enabled: true
@@ -283,6 +289,9 @@ Style/BisectedAttrAccessor:
 
 Style/CaseLikeIf:
   Enabled: true
+
+Style/Documentation:
+  Enabled: false
 
 Style/ExponentialNotation:
   Enabled: true

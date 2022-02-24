@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TradePlatform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "TradePlatform" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <p class="notice" style="position: absolute"><%= notice %></p>
+    <p class="alert" style="position: absolute"><%= alert %></p>
+
+    <header class="site-header sticky-top py-1">
+      <%= render 'layouts/partials/header' %>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer class="container py-5">
+      <%= render 'layouts/partials/footer' %>
+    </footer>
+
   </body>
 </html>

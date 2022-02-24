@@ -22,14 +22,6 @@
  * Custom translucent site header
  */
 
-.wrapper {
-  display: grid;
-  grid-template-columns:  49vw 49vw ;
-  grid-gap: 1rem;
-  color: #444;
-  justify-content: center
-}
-
 .site-header {
   background-color: rgba(0, 0, 0, 0.85);
   -webkit-backdrop-filter: saturate(180%) blur(20px);

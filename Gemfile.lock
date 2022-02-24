@@ -211,6 +211,7 @@ GEM
     nokogiri (1.13.1-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    parallel (1.21.0)
     parser (3.1.0.0)
       ast (~> 2.4.1)
     path_expander (1.1.0)
@@ -291,6 +292,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rexml (3.2.5)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
     rspec-expectations (3.11.0)
@@ -308,7 +310,25 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.11.0)
+    rubocop (1.24.1)
+      parallel (~> 1.10)
+      parser (>= 3.0.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml
+      rubocop-ast (>= 1.15.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.15.1)
+      parser (>= 3.0.1.1)
+    rubocop-rails (2.13.1)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.7.0, < 2.0)
+    rubocop-rspec (2.7.0)
+      rubocop (~> 1.19)
     ruby-next-core (0.14.1)
+    ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     ruby_parser (3.18.1)
       sexp_processor (~> 4.16)
@@ -372,6 +392,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (2.1.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -425,6 +446,9 @@ DEPENDENCIES
   redis
   redis-rails
   rspec-rails
+  rubocop
+  rubocop-rails
+  rubocop-rspec
   rubycritic
   sass-rails (>= 6)
   shoulda-matchers

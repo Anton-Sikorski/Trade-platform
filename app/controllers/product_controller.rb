@@ -4,7 +4,7 @@ class ProductController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy]
 
   def index
-    @products = Product.all
+    @products = Product.all.includes(:features)
   end
 
   def show; end
@@ -44,6 +44,6 @@ class ProductController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit( :category_id, :title, :price, :description)
+      params.require(:product).permit(:category_id, :title, :price, :description)
     end
 end

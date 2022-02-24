@@ -20,7 +20,7 @@ RSpec.describe ProductController, type: :controller do
     let(:product) { create(:product) }
 
     it "returns product" do
-      get :show, params: { category_id: product.category_id, id: product.id  }
+      get :show, params: { category_id: product.category_id, id: product.id }
 
       expect(response).to render_template("show")
       expect(response).to have_http_status(:ok)

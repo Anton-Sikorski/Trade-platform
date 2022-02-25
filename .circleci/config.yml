@@ -25,15 +25,15 @@ jobs:
       - image: cimg/ruby:3.0.2-node
       - image: circleci/postgres:9.5-alpine
         environment:
-          POSTGRES_USER: anton.sikorski
-          POSTGRES_DB: DevAuth_development
-          POSTGRES_PASSWORD: 1234567
+          POSTGRES_USER: ENV['PG_USERNAME']
+          POSTGRES_DB: trade_platform_development
+          POSTGRES_PASSWORD: ENV['PG_PASSWORD']
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
       PGHOST: 127.0.0.1
-      PGUSER: anton.sikorski
-      PGPASSWORD: 1234657
+      PGUSER: ENV['PG_USERNAME']
+      PGPASSWORD: ENV['PG_PASSWORD']
       RAILS_ENV: test
     steps:
       - checkout

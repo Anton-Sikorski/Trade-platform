@@ -37,8 +37,8 @@ group :development, :test do
   gem "rails-controller-testing"
   gem "rspec-rails"
   gem "rubocop"
+  gem "rubocop-performance"
   gem "rubocop-rails"
-  gem 'rubocop-performance'
   gem "rubocop-rspec"
   gem "shoulda-matchers"
 end

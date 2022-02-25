@@ -22,6 +22,6 @@ FactoryBot.define do
   factory :feature_value do
     feature_id { FactoryBot.create(:feature).id }
 
-    value { Faker::Lorem.word }
+    value { Faker::Lorem.sentence }
   end
 end

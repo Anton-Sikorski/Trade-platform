@@ -9,6 +9,7 @@ default: &default
 development:
   <<: *default
   database: trade_platform_development
+
 test:
   <<: *default
   database: trade_platform_test
@@ -16,5 +17,5 @@ test:
 production:
   <<: *default
   database: trade_platform_production
-  username: trade_platform
+  username: <%= ENV['PG_USERNAME'] %>
   password: <%= ENV['TRADE_PLATFORM_DATABASE_PASSWORD'] %>

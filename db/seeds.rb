@@ -7,8 +7,8 @@
 100.times do
   h = {}
   h["size"] = rand(100_000..1_000_000).to_s.gsub /(\d{2})(\d{2})(\d{2})/, '\1x\2x\3'
-  h["color"] =  Faker::Lorem.word
-  h["material"] = Faker::Lorem.word
+  h[Faker::Lorem.word] = Faker::Lorem.word
+  h[Faker::Lorem.word] = Faker::Lorem.word
 
   p = Product.create(title: Faker::Lorem.word, price: Faker::Number.decimal, category_id: rand(1..5))
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FeatureController < ApplicationController
   before_action :set_feature, only: %i[destroy]
 
@@ -20,11 +22,11 @@ class FeatureController < ApplicationController
 
   private
 
-  def feature_params
-    params.require(:feature).permit(:name)
-  end
+    def feature_params
+      params.require(:feature).permit(:name)
+    end
 
-  def set_feature
-    @feature = Feature.find(params[:category_id, :product_id, :id])
-  end
+    def set_feature
+      @feature = Feature.find(params[:category_id, :product_id, :id])
+    end
 end

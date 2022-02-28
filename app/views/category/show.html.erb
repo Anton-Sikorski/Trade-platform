@@ -1,7 +1,9 @@
 
 <div class="container-sidebar">
-  <div class="sidebar m-1 bg-light border rounded-3">
-
+  <div class="sidebar m-1 p-5 bg-light border rounded-3">
+    <% @features.each do |f| %>
+      <p><%= f %></p>
+    <% end %>
   </div>
 
   <div class="content">

@@ -47,7 +47,7 @@ RSpec/MultipleExpectations:
 
 Rails/UniqueValidationWithoutIndex:
   Enabled: false
-  
+
 # Prefer &&/|| over and/or.
 Style/AndOr:
   Enabled: true

@@ -196,10 +196,6 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    logidze (1.2.1)
-      activerecord (>= 5.0)
-      railties (>= 5.0)
-      ruby-next-core (~> 0.9)
     loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -334,7 +330,6 @@ GEM
       rubocop (>= 1.7.0, < 2.0)
     rubocop-rspec (2.7.0)
       rubocop (~> 1.19)
-    ruby-next-core (0.14.1)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     ruby_parser (3.18.1)
@@ -444,7 +439,6 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   kaminari
   listen (~> 3.3)
-  logidze
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

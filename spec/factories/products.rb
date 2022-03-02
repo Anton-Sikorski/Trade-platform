@@ -22,7 +22,7 @@
 FactoryBot.define do
   factory :product do
     category { FactoryBot.create(:category) }
-    title { Faker::Lorem.unique.words(number: 2).join(' ') }
+    title { Faker::Lorem.unique.words(number: 2).join(" ") }
     price { Faker::Number.decimal }
   end
 end

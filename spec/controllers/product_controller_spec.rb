@@ -7,12 +7,12 @@ RSpec.describe ProductController, type: :controller do
     let(:category) { create(:category) }
     let(:products) { [create(:product, category_id: category.id)] }
 
-    it "returns all pages" do
+    it "returns all products" do
       get :index, params: { category_id: category.id }
 
       expect(response).to render_template("index")
       expect(response).to have_http_status(:ok)
-      expect(assigns(:products)).to eq(products)
+      expect(assigns(:products)).to eq(Product.all)
     end
   end
 

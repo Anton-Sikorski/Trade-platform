@@ -1,0 +1,35 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@0.1.2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:3.0.2
+        environment:
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+          PG_HOST: 127.0.0.1
+          PGUSER: trade_platform
+      - image: circleci/postgres:12.9
+        environment:
+          POSTGRES_DB: trade_platform_test
+          POSTGRES_USER: trade_platform
+          POSTGRES_PASSWORD: 12345678
+    executor: ruby/default
+    steps:
+      - checkout
+      - run: gem install bundler
+      - restore_cache:
+          name: Restore bundle cache
+          key: trade_platform-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --path vendor/bundle
+      - save_cache:
+          name: Store bundle cache
+          key: trade_platform-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run: bundle exec rubocop
+      - run: bundle exec rake db:setup
+      - run: bundle exec rspec

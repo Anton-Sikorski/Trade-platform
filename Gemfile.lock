@@ -119,6 +119,10 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
     docile (1.4.0)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     equalizer (0.0.11)
     erubi (1.10.0)
     erubis (2.7.0)
@@ -192,10 +196,6 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    logidze (1.2.1)
-      activerecord (>= 5.0)
-      railties (>= 5.0)
-      ruby-next-core (~> 0.9)
     loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -321,13 +321,15 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.15.1)
       parser (>= 3.0.1.1)
+    rubocop-performance (1.13.2)
+      rubocop (>= 1.7.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
     rubocop-rails (2.13.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
     rubocop-rspec (2.7.0)
       rubocop (~> 1.19)
-    ruby-next-core (0.14.1)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     ruby_parser (3.18.1)
@@ -429,6 +431,7 @@ DEPENDENCIES
   capybara
   database_cleaner
   devise
+  dotenv-rails
   factory_bot_rails
   faker
   fx
@@ -436,7 +439,6 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   kaminari
   listen (~> 3.3)
-  logidze
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
@@ -447,6 +449,7 @@ DEPENDENCIES
   redis-rails
   rspec-rails
   rubocop
+  rubocop-performance
   rubocop-rails
   rubocop-rspec
   rubycritic

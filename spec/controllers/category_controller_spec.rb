@@ -11,7 +11,7 @@ RSpec.describe CategoryController, type: :controller do
 
       expect(response).to render_template("index")
       expect(response).to have_http_status(:ok)
-      expect(assigns(:categories)).to eq(categories)
+      expect(assigns(:categories)).to eq(Category.all)
     end
   end
 

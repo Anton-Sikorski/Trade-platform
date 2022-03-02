@@ -1,10 +1,12 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: <%= ENV['PG_USERNAME'] %>
-  password: <%= ENV['PG_PASSWORD'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   timeout: 5000
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV['DB_HOST'] %>
+  port: 5432
 
 development:
   <<: *default
@@ -17,5 +19,3 @@ test:
 production:
   <<: *default
   database: trade_platform_production
-  username: <%= ENV['PG_USERNAME'] %>
-  password: <%= ENV['TRADE_PLATFORM_DATABASE_PASSWORD'] %>

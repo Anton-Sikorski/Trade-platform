@@ -7,7 +7,11 @@ class CategoryController < ApplicationController
     @categories = Category.all
   end
 
-  def show; end
+  def show
+    @features = @category.products.map do |p|
+      p.features.map(&:name)
+    end.flatten.uniq
+  end
 
   def new; end
 

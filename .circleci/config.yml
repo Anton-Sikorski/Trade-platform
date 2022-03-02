@@ -8,14 +8,14 @@ jobs:
     docker:
       - image: circleci/ruby:3.0.2
         environment:
-          RAILS_ENV: develop
+          RAILS_ENV: test
           DB_HOST: 127.0.0.1
           PG_HOST: 127.0.0.1
-          PGUSER: anton.sikorski
+          PGUSER: trade_platform
       - image: circleci/postgres:12.9
         environment:
-          POSTGRES_DB: trade_platform_development
-          POSTGRES_USER: anton.sikorski
+          POSTGRES_DB: trade_platform_test
+          POSTGRES_USER: trade_platform
           POSTGRES_PASSWORD: 12345678
     executor: ruby/default
     steps:

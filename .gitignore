@@ -14,6 +14,7 @@
 !/tmp/.keep
 
 /coverage
+/.env
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*

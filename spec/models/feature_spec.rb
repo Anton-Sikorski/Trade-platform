@@ -6,6 +6,7 @@
 #
 #  id         :bigint           not null, primary key
 #  name       :string           not null
+#  value      :string           not null
 #  product_id :bigint           not null
 #
 # Indexes

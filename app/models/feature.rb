@@ -19,7 +19,6 @@
 #
 class Feature < ApplicationRecord
   belongs_to :product
-  has_one :feature_value, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true, length: { minimum: 2 }
   validates :value, presence: true, length: { minimum: 2 }

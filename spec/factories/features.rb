@@ -19,6 +19,6 @@
 FactoryBot.define do
   factory :feature do
     product { FactoryBot.create(:product) }
-    name { Faker::Lorem.unique.words(2).join(" ") }
+    name { Faker::Lorem.unique.words(number: 2).join(" ") }
   end
 end

@@ -6,6 +6,7 @@
 #
 #  id         :bigint           not null, primary key
 #  name       :string           not null
+#  value      :string           not null
 #  product_id :bigint           not null
 #
 # Indexes
@@ -20,5 +21,6 @@ FactoryBot.define do
   factory :feature do
     product { FactoryBot.create(:product) }
     name { Faker::Lorem.unique.words(number: 2).join(" ") }
+    value { Faker::Lorem.unique.sentence }
   end
 end

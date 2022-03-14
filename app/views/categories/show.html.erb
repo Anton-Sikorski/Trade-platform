@@ -1,0 +1,20 @@
+
+<div class="container-sidebar">
+  <div class="sidebar m-1 p-5 bg-light border rounded-3">
+    <% @features.each do |f| %>
+      <p><%= f %></p>
+    <% end %>
+  </div>
+
+  <p><%= link_to "New product", new_category_product_path(@category) %></p>
+
+  <div class="content">
+    <% @category.products.each do |p| %>
+      <div class="m-1 p-5 bg-light border rounded-3">
+        <h3><%= link_to p.title.capitalize, category_product_path(p) %></h3>
+        <p><%= p.price %></p>
+      </div>
+    <% end %>
+  </div>
+
+</div>

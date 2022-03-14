@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CategoryController < ApplicationController
+class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
 
   def index
@@ -8,7 +8,7 @@ class CategoryController < ApplicationController
   end
 
   def show
-    @features = @category.products.map do |p|
+    @features = @category.products.includes(:features).map do |p|
       p.features.map(&:name)
     end.flatten.uniq
   end

@@ -1,0 +1,14 @@
+<p><%= @product.title %></p>
+
+<p><%= @product.price %></p>
+
+<div>
+  <% @product.features.each do |f| %>
+    <div>
+      <span><%= "#{f.name}:" %> | </span>
+      <span><%= f.value %></span>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "Edit", edit_category_product_path(@product) %>

@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
-class ProductController < ApplicationController
+class ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy]
-
-  def index
-    @products = Product.all.includes(:features)
-  end
 
   def show; end
 
-  def new; end
+  def new
+    @product = Product.new
+  end
 
   def edit; end
 

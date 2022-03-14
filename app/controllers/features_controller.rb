@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FeatureController < ApplicationController
+class FeaturesController < ApplicationController
   before_action :set_feature, only: %i[destroy]
 
   def create

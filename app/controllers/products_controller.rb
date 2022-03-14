@@ -12,7 +12,8 @@ class ProductsController < ApplicationController
   def edit; end
 
   def create
-    @product = Product.new(product_params)
+    category = Category.find(params[:category_id])
+    @product = Product.new(product_params.merge(category: category))
 
     if @product.save
       redirect_to :root, notice: "Product was successfully created."

@@ -1,18 +1,35 @@
+<div class="d-inline-flex justify-content-between w-100 bg-light border rounded-3">
+  <div class="px-3">
+    <%= link_to "Back", categories_path %>
+  </div>
+  <div class="px-3">
+    <%= link_to "Edit", edit_category_path(@category) %>
+  </div>
+</div>
 
-<div class="container-sidebar">
-  <div class="sidebar m-1 p-5 bg-light border rounded-3">
+<div class="container-sidebar w-100">
+  <div class="sidebar m-1 p-4 bg-light border rounded-3">
     <% @features.each do |f| %>
-      <p><%= f %></p>
+      <div class="sidebar-attribute p-2">
+        <p><%= f.capitalize %></p>
+      </div>
     <% end %>
+    <hr>
+    <div class="sidebar-attribute p-2">
+      <p><%= link_to "New products", new_category_product_path(@category) %></p>
+    </div>
   </div>
 
-  <p><%= link_to "New product", new_category_product_path(@category) %></p>
-
-  <div class="content">
+  <div class="content d-flex flex-column">
     <% @category.products.each do |p| %>
-      <div class="m-1 p-5 bg-light border rounded-3">
-        <h3><%= link_to p.title.capitalize, category_product_path(p) %></h3>
-        <p><%= p.price %></p>
+      <div class="m-1 p-4 w-100 bg-light border rounded-3 d-inline-flex align-items-center">
+        <figure>
+          <%= image_tag(src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/#{rand(1..100)}.png") %>
+        </figure>
+        <div class="mx-2">
+          <h3><%= link_to p.title.capitalize, category_product_path(p) %></h3>
+          <p><%= p.price %></p>
+        </div>
       </div>
     <% end %>
   </div>

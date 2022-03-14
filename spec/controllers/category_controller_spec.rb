@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe CategoryController, type: :controller do
+RSpec.describe CategoriesController, type: :controller do
   describe "GET #index" do
     let(:categories) { [create(:category)] }
 
@@ -18,7 +18,7 @@ RSpec.describe CategoryController, type: :controller do
   describe "GET #show" do
     let(:category) { create(:category) }
 
-    it "returns category" do
+    it "returns categories" do
       get :show, params: { id: category.id }
 
       expect(response).to render_template("show")
@@ -28,7 +28,7 @@ RSpec.describe CategoryController, type: :controller do
   end
 
   describe "GET #new" do
-    it "returns render form for creating new category" do
+    it "returns render form for creating new categories" do
       get :new
 
       expect(response).to render_template("new")
@@ -39,14 +39,14 @@ RSpec.describe CategoryController, type: :controller do
   describe "POST #create" do
     let(:category_params) { attributes_for(:category) }
 
-    it "creates new category" do
+    it "creates new categories" do
       post :create, params: { category: category_params }
 
       expect(response).to redirect_to(root_url)
       expect(response).to have_http_status(:found)
     end
 
-    it "does not create new category" do
+    it "does not create new categories" do
       post :create, params: { category: { title: "a" } }
 
       expect(response).to render_template("new")
@@ -57,7 +57,7 @@ RSpec.describe CategoryController, type: :controller do
   describe "GET #edit" do
     let(:category) { create(:category) }
 
-    it "returns render form for editing category" do
+    it "returns render form for editing categories" do
       get :edit, params: { id: category.id }
 
       expect(response).to render_template("edit")
@@ -68,14 +68,14 @@ RSpec.describe CategoryController, type: :controller do
   describe "PUT #update" do
     let(:category) { create(:category) }
 
-    it "updates category" do
+    it "updates categories" do
       put :update, params: { id: category.id, category: { title: "New title" } }
 
       expect(response).to redirect_to(root_url)
       expect(response).to have_http_status(:found)
     end
 
-    it "does not update category" do
+    it "does not update categories" do
       put :update, params: { id: category.id, category: { title: nil } }
 
       expect(response).to render_template("edit")
@@ -86,7 +86,7 @@ RSpec.describe CategoryController, type: :controller do
   describe "DELETE #destroy" do
     let(:category) { create(:category) }
 
-    it "destroys category" do
+    it "destroys categories" do
       delete :destroy, params: { id: category.id }
 
       expect(response).to redirect_to(root_url)

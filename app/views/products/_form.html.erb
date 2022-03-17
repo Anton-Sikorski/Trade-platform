@@ -16,7 +16,7 @@
         <%= form.text_field :price %>
       </div>
       <% @product.errors.full_messages_for(:price).each do |message| %>
-        <div class="bg-warning border rounded-3 my-1 "><%= message %></div>
+        <div class="bg-warning border rounded-3 my-1"><%= message %></div>
       <% end %>
     </div>
   </div>

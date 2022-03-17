@@ -3,11 +3,11 @@
     <%= form.label :title %>
     <%= form.text_field :title %>
     <% @category.errors.full_messages_for(:title).each do |message| %>
-      <div class="bg-warning border rounded-3 my-1 w-25"><%= message %></div>
+      <div class="bg-warning border rounded-3 my-1"><%= message %></div>
     <% end %>
   </div>
 
-  <div>
+  <div class="my-3">
     <%= form.submit %>
   </div>
 <% end %>

@@ -13,7 +13,9 @@ class CategoriesController < ApplicationController
     end.flatten.uniq
   end
 
-  def new; end
+  def new
+    @category = Category.new
+  end
 
   def edit; end
 

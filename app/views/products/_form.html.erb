@@ -27,7 +27,7 @@
       <%= form.fields_for :features do |subform| %>
         <%= tag.div id: "feature#{subform.index}", class: "d-inline-flex" do %>
           <%= subform.text_field :name, class: "mr-1" %>
-          <%= subform.text_field :value %>
+          <%= subform.text_field :value, class: "mr-1" %>
           <%= tag.div id: "#{subform.index}",class: "destroyNode border rounded-3 bg-white p-1" do %>
             <% if @product.features.each(&:id).any?(subform.index) %>
               <%= link_to "X", category_product_feature_path(@product.category, @product, @product.features[subform.index]),class: 'text-dark', method: :delete %>
@@ -38,10 +38,10 @@
         <% end %>
       <% end %>
     </div>
-    <div id="addFeature" class="my-3 border rounded-3 p-2 bg-white">
-<!--      <#%= link_to "Add features", new_category_product_feature_path(@product.category, @product),class: 'text-dark', method: :get%>-->
-      <p>Add feature</p>
-    </div>
+  </div>
+
+  <div id="addFeature" class="my-3 border rounded-3 p-2 bg-white">
+    <p>Add feature</p>
   </div>
 
   <div class="my-3">

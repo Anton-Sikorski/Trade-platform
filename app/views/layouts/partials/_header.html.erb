@@ -2,4 +2,12 @@
 
   <%= link_to "Catalogue", categories_path, class: "py-2 d-none d-md-inline-block" %>
   <a class="py-2 d-none d-md-inline-block" href="#">Cart</a>
+
+  <%if signed_in?%>
+    <%=link_to current_user.email, edit_user_registration_path, class: "py-2 d-none d-md-inline-block"%>
+    <%=link_to "Logout", destroy_user_session_path, method: :delete, class: "py-2 d-none d-md-inline-block"%>
+  <%else%>
+    <%=link_to "Register", new_user_registration_path, class: "py-2 d-none d-md-inline-block"%>
+    <%=link_to "Login", new_user_session_path, class: "py-2 d-none d-md-inline-block"%>
+  <%end%>
 </nav>

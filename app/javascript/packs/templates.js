@@ -18,7 +18,7 @@ $(document).ready(function(){
                     "<input class='mr-1' type='text'  name='product[features_attributes][" + (childCount) + "][name]' id='product_features_attributes_" + (childCount) + "_name'>" +
                     "<input class='mr-1' type='text' name='product[features_attributes][" + (childCount) + "][value]' id='product_features_attributes_" + (childCount) + "_value'>" +
                     "<div id='" + (childCount) + "' class='destroyNode border rounded-3 bg-white p-1'>" +
-                        "<div class='text-dark'>X</div>" +
+                        "<a class='m-2  text-dark'>X</a>" +
                     "</div>" +
                 "</div>"
             ));

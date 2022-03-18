@@ -30,12 +30,18 @@
           <%= subform.text_field :value, class: "mr-1" %>
           <%= tag.div id: "#{subform.index}",class: "destroyNode border rounded-3 bg-white p-1" do %>
             <% features_ids = @product.features.map(&:id) %>
-            <% if features_ids.any?(subform.object.id) %>
+            <% if features_ids.compact.any?(subform.object.id) %>
               <%= link_to "X", category_product_feature_path(@product.category, @product, @product.features[subform.index]),class: 'm-2 text-dark', method: :delete %>
             <% else %>
               <a class='text-dark'>X</a>
             <% end %>
           <% end %>
+        <% end %>
+        <% subform.object.errors.full_messages_for(:name).each do |message| %>
+          <div class="bg-warning border rounded-3 my-1"><%= message %></div>
+        <% end %>
+        <% subform.object.errors.full_messages_for(:value).each do |message| %>
+          <div class="bg-warning border rounded-3 my-1"><%= message %></div>
         <% end %>
       <% end %>
     </div>

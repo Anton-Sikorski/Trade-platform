@@ -1,16 +1,16 @@
 <nav class="container d-flex flex-column flex-md-row justify-content-between">
 
   <%= link_to "Catalogue", categories_path, class: "py-2 d-none d-md-inline-block" %>
-  <a class="py-2 d-none d-md-inline-block" href="#">Cart</a>
-
-  <li>
-    <%= link_to cart_path, class: "py-2 d-none d-md-inline-block" do%>
-      <span>My Cart</span>
-      (<span class="cart-count"><%=current_user.cart_count%></span>)
-    <%end%>
-  </li>
 
   <%if signed_in?%>
+    <a class="py-2 d-none d-md-inline-block" href="#">Cart</a>
+    <div>
+      <%= link_to cart_path, class: "py-2 d-none d-md-inline-block" do%>
+        <span>My Cart</span>
+        (<span class="cart-count"><%=current_user.cart_count%></span>)
+      <%end%>
+    </div>
+
     <div>
       <%=link_to current_user.email, edit_user_registration_path, class: "py-2 d-none d-md-inline-block"%>
       <%=link_to "Logout", destroy_user_session_path, method: :delete, class: "py-2 d-none d-md-inline-block"%>

@@ -1,4 +1,25 @@
-<h1>Cart</h1>
-<% @cart_products.each do |product| %>
-  <%= product.name %>
-<% end %>
+<div id="mycart">
+  <div class="p1 glassy-bg mb1 text-center radius-l1 radius-r1">
+    <h4>My Cart</h4>
+    <p class="mb0"> You've selected <span class="cart-count"><%=current_user.cart_count%></span> products!</p>
+  </div>
+
+  <% @cart_products.each do |product|%>
+    <div data-equalizer>
+      <div data-equalizer-watch>
+        <%=link_to product do%>
+          <%= image_tag(src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/#{rand(1..100)}.png") %>
+        <%end%>
+      </div>
+      <div data-equalizer-watch>
+        <p> <%= product.title %> </p>
+      </div>
+      <div data-equalizer-watch>
+        <%=link_to "" , data: {targetUrl: remove_from_cart_path(product)} do%>
+          <p>X</p>
+        <%end%>
+        <h4>$ <%= product.price %></h4>
+      </div>
+    </div>
+  <%end%>
+</div>

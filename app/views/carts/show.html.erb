@@ -6,19 +6,21 @@
 
   <% @cart_products.each do |product|%>
     <div data-equalizer>
-      <div data-equalizer-watch>
-        <%=link_to product do%>
-          <%= image_tag(src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/#{rand(1..100)}.png") %>
-        <%end%>
+      <div class="p-3 bg-light border rounded-3 d-inline-flex align-items-center">
+        <div data-equalizer-watch>
+          <%=link_to category_product_path(product.category, product) do%>
+            <%= image_tag(src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/#{rand(1..100)}.png") %>
+          <%end%>
+        </div>
+
+        <div class="mx-2">
+          <h4><%= link_to product.title.capitalize %></h4>
+          <h4>$ <%= product.price %></h4>
+        </div>
       </div>
+
       <div data-equalizer-watch>
-        <p> <%= product.title %> </p>
-      </div>
-      <div data-equalizer-watch>
-        <%=link_to "" , data: {targetUrl: remove_from_cart_path(product)} do%>
-          <p>X</p>
-        <%end%>
-        <h4>$ <%= product.price %></h4>
+        <%= link_to "Remove", remove_from_cart_path(product), class: "button", method: :put %>
       </div>
     </div>
   <%end%>

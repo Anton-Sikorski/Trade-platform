@@ -20,7 +20,7 @@ $(document).ready(function() {
 })
 
 $(document).ready(function() {
-    $('#mycart .fi-x').click(function (e) {
+    $('#mycart').click(function (e) {
         e.preventDefault()
         let $this = $(this).closest('a')
         let url = $this.data('targeturl')

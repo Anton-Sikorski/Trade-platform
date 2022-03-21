@@ -29,7 +29,9 @@
     </tbody>
   </table>
 
-  <%= link_to "Buy", add_to_cart_path(@product), class: "button", method: :put %>
+  <div>
+    <%= link_to "Buy", add_to_cart_path(@product),id: "buyBtn", class: "button", method: :put %>
+  </div>
 
   <div class="d-inline-flex justify-content-between w-100">
     <div class="px-3">

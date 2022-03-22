@@ -4,6 +4,8 @@ require "rails_helper"
 require_relative "../support/devise"
 
 RSpec.describe CartsController, type: :controller do
+  before { $redis.flushdb }
+
   describe "GET /show" do
     let(:user) { create(:user) }
 

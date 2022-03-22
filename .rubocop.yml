@@ -53,6 +53,9 @@ Rails/UniqueValidationWithoutIndex:
 Style/AndOr:
   Enabled: true
 
+Style/GlobalVars:
+  Enabled: false
+
 # Align `when` with `case`.
 Layout/CaseIndentation:
   Enabled: true

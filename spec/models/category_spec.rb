@@ -4,10 +4,11 @@
 #
 # Table name: categories
 #
-#  id         :bigint           not null, primary key
-#  title      :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :bigint           not null, primary key
+#  description :string           not null
+#  title       :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 require "rails_helper"
 
@@ -27,11 +28,19 @@ RSpec.describe Category, type: :model do
 
         include_examples "not_create_object_for", :category, title: "test"
       end
+
+      context "with too short description" do
+        include_examples "not_create_object_for", :category, description: "a"
+      end
     end
 
     context "with missing attributes" do
       context "with missing title" do
         include_examples "not_create_object_for", :category, title: nil
+      end
+
+      context "with missing description" do
+        include_examples "not_create_object_for", :category, description: nil
       end
     end
   end

@@ -6,7 +6,7 @@
   <% @categories.each do |c| %>
     <div class="category">
       <h3><%= link_to c.title.capitalize, category_path(c) %></h3>
-      <p class="lead">Dolores sit sint laboriosam dolorem culpa et autem. Beatae nam sunt fugit et sit et mollitia sed. Fuga deserunt tempora facere magni omnis. Omnis quia temporibus laudantium sit minima sint.</p>
+      <p class="lead"><%= c.description %></p>
     </div>
   <% end %>
 </div>

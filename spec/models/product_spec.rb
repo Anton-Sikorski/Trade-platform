@@ -5,6 +5,7 @@
 # Table name: products
 #
 #  id          :bigint           not null, primary key
+#  description :string           not null
 #  price       :float            not null
 #  title       :string           not null
 #  created_at  :datetime         not null
@@ -36,6 +37,10 @@ RSpec.describe Product, type: :model do
         include_examples "not_create_object_for", :product, title: "test"
       end
 
+      context "with too short description" do
+        include_examples "not_create_object_for", :product, description: "a"
+      end
+
       context "with negative price" do
         include_examples "not_create_object_for", :product, price: -0.1
       end
@@ -44,6 +49,10 @@ RSpec.describe Product, type: :model do
     context "with missing attributes" do
       context "with missing title" do
         include_examples "not_create_object_for", :product, title: nil
+      end
+
+      context "with missing description" do
+        include_examples "not_create_object_for", :product, description: nil
       end
 
       context "with missing price" do

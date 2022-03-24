@@ -25,7 +25,7 @@ class FeaturesController < ApplicationController
     if @feature.update(feature_params)
       redirect_to :root, notice: "Feature was successfully updated."
     else
-      render  edit_category_product_path(@feature.product.category, @feature.product ), status: :unprocessable_entity
+      render  edit_category_product_path(@feature.product.category, @feature.product), status: :unprocessable_entity
     end
   end
 

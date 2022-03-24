@@ -1,21 +1,23 @@
 <div id="myCart">
-  <div class="p1 glassy-bg mb1 text-center radius-l1 radius-r1">
+  <div class="cart-info">
     <h4>My Cart</h4>
     <p class="mb0"> You've selected <span class="cart-count"><%=current_user.cart_count%></span> products!</p>
   </div>
 
   <% @cart_products.each do |product|%>
-    <div id="cartProduct" class="my-1">
-      <div class="p-3 bg-light border rounded-3 d-inline-flex align-items-center">
-        <%=link_to category_product_path(product.category, product) do%>
-          <%= image_tag(src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/#{rand(1..100)}.png") %>
-        <%end%>
+    <div id="cartProduct" class="cart-show my-3">
+      <figure class="image">
+        <%= image_tag(src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/#{rand(1..100)}.png") %>
+      </figure>
 
-        <div class="mx-2">
-          <h5><%= link_to product.title.capitalize %></h5>
-          <h6>$ <%= product.price %></h6>
-          <%= link_to "Remove", remove_from_cart_path(product), id: "removeBtn", method: :put %>
-        </div>
+      <div class="info">
+        <h4><%= link_to product.title.capitalize, category_product_path(product.category_id, product.id) %></h4>
+        <p class="description">Dolores sit sint laboriosam dolorem culpa et autem. Beatae nam sunt fugit et sit et mollitia sed. Fuga deserunt tempora facere</p>
+      </div>
+
+      <div class="payment">
+          <%= link_to "Remove", remove_from_cart_path(product), class: "button removeBtn", method: :put %>
+        <p><b><%= product.price %></b></p>
       </div>
     </div>
   <%end%>

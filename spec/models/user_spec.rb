@@ -20,43 +20,45 @@
 #
 #  fk_rails_...  (category_id => categories.id)
 #
-RSpec.describe Product, type: :model do
+RSpec.describe User, type: :model do
   describe ".create" do
     context "with valid attributes" do
-      include_examples "creates_object_for", :product
+      include_examples "creates_object_for", :user
     end
 
     context "with invalid attributes" do
-      context "with too short title" do
-        include_examples "not_create_object_for", :product, title: "a"
+      context "with too short name" do
+        include_examples "not_create_object_for", :user, name: "a"
       end
 
-      context "with repeating title" do
-        before { create(:product, title: "test") }
+      context "with repeating name" do
+        before { create(:user, name: "test") }
 
-        include_examples "not_create_object_for", :product, title: "test"
+        include_examples "not_create_object_for", :user, name: "test"
       end
 
-      context "with too short description" do
-        include_examples "not_create_object_for", :category, description: "a"
+      context "with invalid email format" do
+        include_examples "not_create_object_for", :user, email: "test"
       end
 
-      context "with negative price" do
-        include_examples "not_create_object_for", :product, price: -0.1
+      context "with repeating email" do
+        before { create(:user, email: "test@test.test") }
+
+        include_examples "not_create_object_for", :user, email: "test@test.test"
       end
     end
 
     context "with missing attributes" do
-      context "with missing title" do
-        include_examples "not_create_object_for", :product, title: nil
+      context "with missing name" do
+        include_examples "not_create_object_for", :user, name: nil
       end
 
-      context "with missing description" do
-        include_examples "not_create_object_for", :category, description: nil
+      context "with missing email" do
+        include_examples "not_create_object_for", :user, email: nil
       end
 
-      context "with missing price" do
-        include_examples "not_create_object_for", :product, price: nil
+      context "with missing password" do
+        include_examples "not_create_object_for", :user, password: nil
       end
     end
   end

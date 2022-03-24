@@ -1,0 +1,11 @@
+$white: rgba(218, 236, 242, 0.3);
+$box-shadow: 12px 12px 2px 1px rgba(52, 110, 235, .2);
+
+.user-form {
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $white;
+  box-shadow: $box-shadow;
+}

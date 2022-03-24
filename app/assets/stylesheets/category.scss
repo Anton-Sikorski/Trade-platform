@@ -1,26 +1,99 @@
-// Place all the styles related to the Category controller here.
-// They will automatically be included in application.scss.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+$white: rgba(218, 236, 242, 0.3);
+$box-shadow: 12px 12px 2px 1px rgba(52, 110, 235, .2);
 
-.container-sidebar{
+.category {
+  width: 580px;
+  height: 300px;
+  box-shadow: $box-shadow;
+}
+
+@media (max-width: 1200px) {
+  .category {
+    width: 380px;
+    height: 200px;
+  }
+
+  .sidebar {
+    width: 250px !important;
+  }
+
+  .category-show{
+    .product-card{
+      width: 550px !important;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.category{
+  background-color: $white;
+  padding: 20px;
+  margin: 10px;
+  overflow: hidden;
+  text-overflow: fade;
+}
+
+.categories-container{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.category-show{
   display: flex;
   flex-direction: row;
-}
 
-.sidebar{
-  min-width: 20vw;
-  top: 0.5em;
-  position: sticky;
-}
+  .sidebar{
+    margin-right: 20px;
+    width: 300px;
+    background-color: $white;
+    box-shadow: $box-shadow;
+    height: fit-content;
+    padding: 12px 20px;
 
-.wrapper {
-  display: grid;
-  grid-template-columns: 18rem 18rem ;
-  grid-gap: 0.5rem;
-  color: #444;
-  justify-content: center
-}
+    .sidebar-attribute {
+      padding: 12px 20px;
+    }
+  }
 
-.sidebar-attribute:hover{
-  background-color: rgba(221,226,231,0.23);
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .product-card{
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    width: 880px;
+    height: fit-content;
+    background-color: $white;
+    display: flex;
+    box-shadow: $box-shadow;
+
+    .image{
+      margin-right: 10px;
+      flex: 1;
+    }
+
+    .info{
+      margin-right: 10px;
+      flex: 3;
+    }
+
+    .payment{
+      margin-right: 10px;
+      flex: 1;
+      padding: 20px 0;
+      p {
+        margin: 8px;
+      }
+    }
+  }
+
 }

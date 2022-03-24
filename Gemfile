@@ -10,6 +10,7 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "cancancan"
 gem "devise"
 gem "fx"
+gem "hiredis"
 gem "hotwire-rails"
 gem "jbuilder", "~> 2.7"
 gem "jquery-rails"

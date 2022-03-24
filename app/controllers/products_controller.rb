@@ -23,7 +23,8 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if @product.update(product_params_for_create)
+    category = Category.find(params[:category_id])
+    if @product.update(product_params_for_create.merge(category: category))
       redirect_to category_product_path(@product.category, @product), notice: "Product was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -43,7 +44,7 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:category_id, :title, :price, :description)
+      params.require(:product).permit(:title, :price, :description)
     end
 
     def product_params_for_create

@@ -33,7 +33,7 @@ RSpec.describe ProductsController, type: :controller do
     it "creates new products" do
       post :create, params: { category_id: category.id, product: product_params }
 
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(category_path(category))
       expect(response).to have_http_status(:found)
     end
 
@@ -62,7 +62,7 @@ RSpec.describe ProductsController, type: :controller do
     it "updates products" do
       put :update, params: { category_id: product.category_id, id: product.id, product: { title: "New name" } }
 
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(category_product_path(product.category, product))
       expect(response).to have_http_status(:found)
     end
 

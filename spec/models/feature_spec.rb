@@ -6,6 +6,7 @@
 #
 #  id         :bigint           not null, primary key
 #  name       :string           not null
+#  value      :string           not null
 #  product_id :bigint           not null
 #
 # Indexes
@@ -34,11 +35,19 @@ RSpec.describe Feature, type: :model do
 
         include_examples "not_create_object_for", :feature, name: "test"
       end
+
+      context "with too short value" do
+        include_examples "not_create_object_for", :feature, value: "a"
+      end
     end
 
     context "with missing attributes" do
       context "with missing title" do
         include_examples "not_create_object_for", :feature, name: nil
+      end
+
+      context "with missing value" do
+        include_examples "not_create_object_for", :feature, value: nil
       end
     end
   end

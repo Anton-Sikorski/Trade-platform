@@ -1,0 +1,78 @@
+<%= form_with model: [:category, @product], local: true do |form| %>
+  <div class="d-inline-flex">
+    <div class="d-flex flex-column my-3">
+      <%= form.label :title %>
+      <div class="d-inline-flex ">
+        <%= form.text_field :title %>
+      </div>
+      <% @product.errors.full_messages_for(:title).each do |message| %>
+        <div class="bg-warning border rounded-3 my-1 "><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="d-flex flex-column my-3">
+      <%= form.label :price %>
+      <div class="d-inline-flex">
+        <%= form.text_field :price %>
+      </div>
+      <% @product.errors.full_messages_for(:price).each do |message| %>
+        <div class="bg-warning border rounded-3 my-1"><%= message %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="my-3">
+    <%= form.label :features %>
+    <div id="featuresList" class="d-flex flex-column">
+      <%= form.fields_for :features do |subform| %>
+        <%= tag.div id: "feature#{subform.index}", class: "d-inline-flex" do %>
+          <%= subform.text_field :name, class: "mr-1" %>
+          <%= subform.text_field :value, class: "mr-1" %>
+          <%= tag.div id: "#{subform.index}",class: "destroyNode border rounded-3 bg-white p-1" do %>
+            <% if @product.features.each(&:id).any?(subform.index) %>
+              <%= link_to "X", category_product_feature_path(@product.category, @product, @product.features[subform.index]),class: 'text-dark', method: :delete %>
+            <% else %>
+              <a class='text-dark'>X</a>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="addFeature" class="my-3 border rounded-3 p-2 bg-white">
+    <p>Add feature</p>
+  </div>
+
+  <div class="my-3">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<script>
+  function destroyNode() {
+      $('.destroyNode').click(function(){
+          const lineId = $(this).attr('id')
+          $('#feature' + lineId).remove();
+      })
+  }
+
+  $(document).ready(function(){
+      destroyNode()
+
+      $('#addFeature').click(function(){
+          const childCount =  $("#featuresList").children().length/2
+          $("#featuresList")
+              .append($(
+                "<div id='feature" + (childCount) + "'class='d-inline-flex'>" +
+                "<input class='mr-1' type='text'  name='product[features_attributes][" + (childCount) + "][name]' id='product_features_attributes_" + (childCount) + "_name'>" +
+                "<input type='text' name='product[features_attributes][" + (childCount) + "][value]' id='product_features_attributes_" + (childCount) + "_value'>" +
+                  "<div id='" + (childCount) + "' class='destroyNode border rounded-3 bg-white p-1'>" +
+                    "<div>X</div>" +
+                  "</div>" +
+                "</div>"
+              ));
+         destroyNode()
+      });
+  });
+</script>

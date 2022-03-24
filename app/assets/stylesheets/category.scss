@@ -5,7 +5,6 @@
 .container-sidebar{
   display: flex;
   flex-direction: row;
-  padding: 0 5vw;
 }
 
 .sidebar{
@@ -16,8 +15,12 @@
 
 .wrapper {
   display: grid;
-  grid-template-columns:  49vw 49vw ;
-  grid-gap: 1rem;
+  grid-template-columns: 18rem 18rem ;
+  grid-gap: 0.5rem;
   color: #444;
   justify-content: center
+}
+
+.sidebar-attribute:hover{
+  background-color: rgba(221,226,231,0.23);
 }

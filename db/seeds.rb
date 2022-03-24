@@ -12,10 +12,7 @@
 
   p = Product.create(title: Faker::Lorem.word, price: Faker::Number.decimal, category_id: rand(1..5))
 
-  h.each_pair do |key, value|
-    a = Feature.create(name: key, product_id: p.id)
-    FeatureValue.create(value: value, feature_id: a.id)
-  end
+  h.each_pair { |key, value| Feature.create(name: key, value: value, product_id: p.id) }
 end
 
 if Rails.env.development?

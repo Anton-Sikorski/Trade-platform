@@ -1,5 +1,5 @@
 function destroyNode() {
-    $('.destroyNode').click(function(){
+    $('.destroyBtn').click(function(){
         const lineId = $(this).attr('id')
         $('#feature' + lineId).remove();
         $("#product_features_attributes_"+ lineId + "_id").remove()

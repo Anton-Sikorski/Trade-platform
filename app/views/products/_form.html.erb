@@ -28,10 +28,10 @@
         <%= tag.div id: "feature#{subform.index}", class: "d-inline-flex" do %>
           <%= subform.text_field :name, class: "mr-1" %>
           <%= subform.text_field :value, class: "mr-1" %>
-          <%= tag.div id: "#{subform.index}",class: "destroyNode border rounded-3 bg-white p-1" do %>
+          <%= tag.div class: "destroyNode border rounded-3 bg-white p-1" do %>
             <% features_ids = @product.features.map(&:id) %>
             <% if features_ids.compact.any?(subform.object.id) %>
-              <%= link_to "X", category_product_feature_path(@product.category, @product, @product.features[subform.index]),class: 'm-2 text-dark', method: :delete %>
+              <%= link_to "X", category_product_feature_path(@product.category, @product, @product.features[subform.index]), id: "#{subform.index}", class: 'destroyBtn m-2 text-dark', method: :delete %>
             <% else %>
               <a class='text-dark'>X</a>
             <% end %>
@@ -52,6 +52,6 @@
   </div>
 
   <div class="my-3">
-    <%= form.submit %>
+    <%= form.submit class: "button" %>
   </div>
 <% end %>

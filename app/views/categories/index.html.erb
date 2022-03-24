@@ -1,16 +1,12 @@
-<div class="bg-light">
+<nav class="navigation-line">
   <%= link_to "New Category", new_category_path %>
-</div>
+</nav>
 
-<div>
+<div class="categories-container">
   <% @categories.each do |c| %>
-    <div class="me-md-3 my-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden style text-white bg-dark">
-      <div class="my-3 py-3">
-        <h2 class="display-5"><%= link_to c.title.capitalize, category_path(c) %></h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="bg-light shadow-sm mx-auto text-black" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-      </div>
+    <div class="category">
+      <h3><%= link_to c.title.capitalize, category_path(c) %></h3>
+      <p class="lead">Dolores sit sint laboriosam dolorem culpa et autem. Beatae nam sunt fugit et sit et mollitia sed. Fuga deserunt tempora facere magni omnis. Omnis quia temporibus laudantium sit minima sint.</p>
     </div>
   <% end %>
 </div>

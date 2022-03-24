@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   def show; end
 
   def new
-    @product = Product.new
+    @product = Product.new(category_id: params[:category_id])
   end
 
   def edit; end

@@ -1,12 +1,16 @@
 $(document).ready(function() {
-    $('#removeBtn').click(function(){
-        console.log('Click!');
+    $('.removeBtn').click(function(){
         $(this).parents('#cartProduct').hide()
-    })
 
-    $('#buyBtn').click(function (){
+        let itemCount = $('#myCart .cart-count').text().match(/\d+/) - 1
+        $('#myCart .cart-count').text( itemCount )
+        $('header .cart-count').text( "(" + itemCount + ")" )
+    });
+
+    $('.add-to-cart').click(function (){
+        console.log('Click!')
         $(this).parent().append($(
-            "<div class='m-1 p-1 border rounded-3 bg-light'>Added to cart!</div>"
+            "<div>Added to cart!</div>"
         ))
         $(this).hide()
     })

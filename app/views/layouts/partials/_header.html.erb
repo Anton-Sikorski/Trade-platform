@@ -1,26 +1,27 @@
-<nav class="container d-flex flex-column flex-md-row justify-content-between">
+<logo class="bg-green">
+    <h2><%= link_to "Money", :root %></h2>
+</logo>
 
-  <%= link_to "Catalogue", categories_path, class: "py-2 d-none d-md-inline-block" %>
+<nav>
+  <%= link_to "Catalogue", categories_path %>
 
   <%if signed_in?%>
-    <a class="py-2 d-none d-md-inline-block" href="#">Cart</a>
     <div>
-      <%= link_to cart_path, class: "py-2 d-none d-md-inline-block" do%>
+      <%= link_to cart_path do %>
         <span>My Cart</span>
-        (<span class="cart-count"><%=current_user.cart_count%></span>)
+        <span class="cart-count">(<%=current_user.cart_count%>)</span>
       <%end%>
     </div>
 
     <div>
-      <%=link_to current_user.email, edit_user_registration_path, class: "py-2 d-none d-md-inline-block"%>
-      <%=link_to "Logout", destroy_user_session_path, method: :delete, class: "py-2 d-none d-md-inline-block"%>
+      <%=image_tag current_user.avatar.variant(resize: "20x20!") %>
+      <%=link_to current_user.email, edit_user_registration_path %>
+      <%=link_to "Logout", destroy_user_session_path, method: :delete %>
     </div>
    <%else%>
     <div>
-      <%=link_to "Register", new_user_registration_path, class: "py-2 d-none d-md-inline-block"%>
-      <%=link_to "Login", new_user_session_path, class: "py-2 d-none d-md-inline-block"%>
+      <%=link_to "Register", new_user_registration_path %>
+      <%=link_to "Login", new_user_session_path %>
     </div>
   <%end%>
-
-
 </nav>

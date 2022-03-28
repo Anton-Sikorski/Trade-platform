@@ -22,6 +22,7 @@
 #
 class Product < ApplicationRecord
   belongs_to :category
+  has_many_attached :images
   has_many :features, dependent: :destroy
 
   accepts_nested_attributes_for :features, allow_destroy: true

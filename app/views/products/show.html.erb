@@ -6,7 +6,7 @@
 <div class="product-show">
   <div class="d-inline-flex">
     <figure class="image">
-      <%= image_tag(src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/#{rand(1..100)}.png") %>
+      <%= image_tag @product.images.first.variant(resize: "100x100!") %>
     </figure>
 
     <div class="info">

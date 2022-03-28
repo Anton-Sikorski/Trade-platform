@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_scope :user do
@@ -9,8 +10,6 @@ Rails.application.routes.draw do
     get '/users/sign_out', to: 'devise/sessions#destroy'
   end
   devise_for :users
-
-  ActiveAdmin.routes(self)
 
   root to: 'categories#index'
 

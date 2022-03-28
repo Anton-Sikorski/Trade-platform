@@ -2,23 +2,22 @@
 
 # == Schema Information
 #
-# Table name: products
+# Table name: users
 #
-#  id          :bigint           not null, primary key
-#  description :string           not null
-#  price       :float            not null
-#  title       :string           not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  category_id :bigint           not null
+#  id                     :bigint           not null, primary key
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  name                   :string           default(""), not null
+#  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #
 # Indexes
 #
-#  index_products_on_category_id  (category_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (category_id => categories.id)
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 RSpec.describe User, type: :model do
   describe ".create" do

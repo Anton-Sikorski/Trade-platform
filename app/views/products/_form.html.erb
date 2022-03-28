@@ -10,6 +10,26 @@
       <% end %>
     </div>
 
+    <div class="field">
+      <% if @product.images.attached? %>
+        <figure class="product-images">
+          <div id="btn-left" class="carousel-btn button"><</div>
+            <div class="image-container">
+              <div class="slider">
+                <% @product.images.each do |img| %>
+                  <%= image_tag img.variant(resize: "150x150!"), class: "image-preview"  %>
+                <% end %>
+              </div>
+            </div>
+          <div id="btn-right" class="carousel-btn button">></div>
+        </figure>
+      <% else %>
+
+      <% end %>
+
+      <%= form.file_field :images, multiple: true %>
+    </div>
+
     <div class="d-flex flex-column my-3">
       <%= form.label :description %>
       <%= form.text_field :description %>
@@ -63,3 +83,94 @@
     <%= form.submit class: "button" %>
   </div>
 <% end %>
+
+<script>
+  // function clickLeftBtn() {
+  //     $('#btn-left').click(() => {
+  //         console.log('Click')
+  //         $('.product-images .image-container').css({
+  //             transition: "transform 0.4s ease-in-out",
+  //             transform: 'translateX(-' + 180 + 'px)'
+  //         })
+  //     })
+  // }
+  //
+  // function clickRightBtn() {
+  //     $('#btn-right').click(() => {
+  //         console.log('Click!')
+  //         $('.product-images .image-container').css({
+  //             transition: "transform 0.4s ease-in-out",
+  //             transform: 'translateX(' + 180 + 'px)'
+  //         })
+  //     })
+  // }
+
+
+
+  $(document).ready(() => {
+
+      $('input[type="file"]').on('change', () => {
+          let srcArray = Array.from($('input[type="file"]').prop('files'))
+          console.log(typeof srcArray)
+          console.log(srcArray[1])
+
+        srcArray.forEach((src) => {
+          $('.product-images .image-container .slider').append($(
+              '<img class="image-preview" src=' + URL.createObjectURL(src) + '>'
+          ))
+        })
+      });
+
+      let slideNow = 1;
+      let translateWidth = 0;
+      let slideCount = $('.slider').children().length;
+
+      function nextSlide() {
+          let slideCount = $('.slider').children().length;
+          console.log('Clicl')
+          if (slideNow === slideCount || slideNow <= 0 || slideNow > slideCount) {
+              $('.slider').css('transform', 'translate(0, 0)');
+              slideNow = 1;
+          } else {
+              console.log('Clck')
+              translateWidth = -170 * (slideNow);
+              $('.slider').css({
+                  'transform': 'translate(' + translateWidth + 'px, 0)',
+                  '-webkit-transform': 'translate(' + translateWidth + 'px, 0)',
+                  '-ms-transform': 'translate(' + translateWidth + 'px, 0)',
+              });
+              slideNow++;
+          }
+      }
+
+      function prevSlide() {
+          let slideCount = $('.slider').children().length;
+          if (slideNow === 1 || slideNow <= 0 || slideNow > slideCount) {
+              translateWidth = -170 * (slideCount - 1);
+              $('.slider').css({
+                  'transform': 'translate(' + translateWidth + 'px, 0)',
+                  '-webkit-transform': 'translate(' + translateWidth + 'px, 0)',
+                  '-ms-transform': 'translate(' + translateWidth + 'px, 0)',
+              });
+              slideNow = slideCount;
+          } else {
+              translateWidth = -$('#viewport').width() * (slideNow - 2);
+              $('.slider').css({
+                  'transform': 'translate(' + translateWidth + 'px, 0)',
+                  '-webkit-transform': 'translate(' + translateWidth + 'px, 0)',
+                  '-ms-transform': 'translate(' + translateWidth + 'px, 0)',
+              });
+              slideNow--;
+          }
+      }
+
+      $('#btn-right').click(function (){
+          nextSlide()
+      })
+
+      $('#btn-left').click(function (){
+          prevSlide()
+      })
+  })
+
+</script>

@@ -4,20 +4,20 @@
     <p class="mb0"> You've selected <span class="cart-count"><%=current_user.cart_count%></span> products!</p>
   </div>
 
-  <% @cart_products.each do |product|%>
+  <% @cart_products.each do |p|%>
     <div id="cartProduct" class="cart-show my-3">
       <figure class="image">
-        <%= image_tag(src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/#{rand(1..100)}.png") %>
+        <%= image_tag p.images.first.variant(resize: "100x100!") %>
       </figure>
 
       <div class="info">
-        <h4><%= link_to product.title.capitalize, category_product_path(product.category_id, product.id) %></h4>
+        <h4><%= link_to p.title.capitalize, category_product_path(p.category_id, p.id) %></h4>
         <p class="description">Dolores sit sint laboriosam dolorem culpa et autem. Beatae nam sunt fugit et sit et mollitia sed. Fuga deserunt tempora facere</p>
       </div>
 
       <div class="payment">
-          <%= link_to "Remove", remove_from_cart_path(product), class: "button removeBtn", method: :put %>
-        <p><b><%= product.price %></b></p>
+          <%= link_to "Remove", remove_from_cart_path(p), class: "button removeBtn", method: :put %>
+        <p><b><%= p.price %></b></p>
       </div>
     </div>
   <%end%>

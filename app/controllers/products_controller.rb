@@ -3,9 +3,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy]
 
-  def show
-    @product
-  end
+  def show; end
 
   def new
     @product = Product.new(category_id: params[:category_id])

@@ -3,7 +3,9 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy]
 
-  def show; end
+  def show
+    @product
+  end
 
   def new
     @product = Product.new(category_id: params[:category_id])
@@ -25,13 +27,7 @@ class ProductsController < ApplicationController
   def update
     category = Category.find(params[:category_id])
     if @product.update(product_params.reject { |k| k["images"] }.merge(category: category))
-
-      if product_params[:images].present?
-        product_params[:images].each do |image|
-          @product.images.attach(image)
-        end
-      end
-      
+      product_params[:images].each { |image| @product.images.attach(image) } if product_params[:images].present?
       redirect_to category_product_path(@product.category, @product), notice: "Product was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -51,7 +47,6 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-
       params.require(:product).permit(:title, :price, :description, images: [],
                                                                     features_attributes: %i[id name value])
     end

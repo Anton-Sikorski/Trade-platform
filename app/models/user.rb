@@ -22,9 +22,8 @@
 class User < ApplicationRecord
   before_create :default_avatar
   has_one_attached :avatar
+  include ReadCache
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -32,7 +31,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   def cart_count
-    $redis.scard "cart#{id}"
+    ReadCache.redis.scard "cart#{id}"
   end
 
   def default_avatar

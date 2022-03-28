@@ -2,18 +2,19 @@
 
 class CartsController < ApplicationController
   before_action :authenticate_user!
+  include ReadCache
 
   def show
-    cart_ids = $redis.smembers current_user_cart
+    cart_ids = ReadCache.redis.smembers current_user_cart
     @cart_products = Product.find(cart_ids)
   end
 
   def add
-    $redis.sadd current_user_cart, params[:product_id]
+    ReadCache.redis.sadd current_user_cart, params[:product_id]
   end
 
   def remove
-    $redis.srem current_user_cart, params[:product_id]
+    ReadCache.redis.srem current_user_cart, params[:product_id]
   end
 
   private

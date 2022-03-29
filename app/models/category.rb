@@ -11,7 +11,7 @@
 #  updated_at  :datetime         not null
 #
 class Category < ApplicationRecord
-  has_many :products, dependent: :destroy
+  has_many :products
 
   validates :title, presence: true, uniqueness: true, length: { minimum: 2 }
   validates :description, presence: true, uniqueness: true, length: { minimum: 6 }

@@ -3,6 +3,16 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
+  config.after_initialize do
+    Bullet.enable        = true
+    Bullet.alert         = true
+    Bullet.bullet_logger = true
+    Bullet.console       = true
+  # Bullet.growl         = true
+    Bullet.rails_logger  = true
+    Bullet.add_footer    = true
+  end
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -74,6 +84,66 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.sentry = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+    Bullet.honeybadger = true
+    Bullet.bugsnag = true
+    Bullet.appsignal = true
+    Bullet.airbrake = true
+    Bullet.rollbar = true
+    Bullet.add_footer = true
+    Bullet.skip_html_injection = false
+    Bullet.stacktrace_includes = [ 'your_gem', 'your_middleware' ]
+    Bullet.stacktrace_excludes = [ 'their_gem', 'their_middleware', ['my_file.rb', 'my_method'], ['my_file.rb', 16..20] ]
+  end
+
+  class MyLogFormatter
+    def initialize
+      # Suppress is an array of request uuids. Each listed uuid means no messages from this request.
+      @suppress = []
+    end
+
+    def call(severity, datetime, progname, message)
+      # Get uuid, which we need to properly distinguish between parallel requests.
+      # Also remove uuid information from log (that's why we match the rest of message)
+      matches = /\[([0-9a-zA-Z\-_]+)\] (.*)/m.match(message)
+
+      if matches
+        uuid = matches[1]
+        message = matches[2]
+
+        if @suppress.include?(uuid) && message.start_with?("Completed ")
+          # Each request in Rails log ends with "Completed ..." message, so do suppressed messages.
+          @suppress.delete(uuid)
+          return nil
+
+        elsif message.start_with?("Processing by ActiveStorage::DiskController#show", "Processing by ActiveStorage::BlobsController#show", "Processing by ActiveStorage::RepresentationsController#show", "Started GET \"/rails/active_storage/disk/", "Started GET \"/rails/active_storage/blobs/", "Started GET \"/rails/active_storage/representations/")
+          # When we use ActiveStorage disk provider, there are three types of request: Disk requests, Blobs requests and Representation requests.
+          # These three types we would like to hide.
+          @suppress << uuid
+          return nil
+
+        elsif !@suppress.include?(uuid)
+          # All messages, which are not suppressed, print. New line must be added here.
+          return "#{message}\n"
+        end
+
+      else
+        # Return message as it is (including new line at the end)
+        return "#{message}\n"
+      end
+
+    end
+  end
+
+  config.log_tags = [:uuid]
+  config.log_formatter = MyLogFormatter.new
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true

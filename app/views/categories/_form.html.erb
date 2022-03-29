@@ -2,17 +2,13 @@
   <div>
     <%= form.label :title %>
     <%= form.text_field :title %>
-    <% @category.errors.full_messages_for(:title).each do |message| %>
-      <div class="bg-warning border rounded-3 my-1"><%= message %></div>
-    <% end %>
+    <%== error_messages(@category, :title) %>
   </div>
 
   <div>
     <%= form.label :description %>
     <%= form.text_field :description %>
-    <% @category.errors.full_messages_for(:description).each do |message| %>
-      <div class="bg-warning border rounded-3 my-1"><%= message %></div>
-    <% end %>
+    <%== error_messages(@category, :description) %>
   </div>
 
   <div class="my-3">

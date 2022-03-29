@@ -1,6 +1,9 @@
-<h1>Editing Store</h1>
+<nav class="navigation-line">
+  <%= link_to 'Show', @store %>
+  <%= link_to 'Back', stores_path %>
+</nav>
 
-<%= render 'form', store: @store %>
-
-<%= link_to 'Show', @store %> |
-<%= link_to 'Back', stores_path %>
+<div class="product-show">
+  <h2>Editing Store</h2>
+  <%= render 'form', store: @store %>
+</div>

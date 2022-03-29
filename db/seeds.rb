@@ -12,6 +12,12 @@ User.create(email: "anton@mail.tu", name: "Anton", password: "123456")
   )
 end
 
+10.times do
+  Store.create(
+    name: Faker::Lorem.words.join(" ")
+  )
+end
+
 100.times do
   h = {}
   h["size"] = rand(100_000..1_000_000).to_s.gsub /(\d{2})(\d{2})(\d{2})/, '\1x\2x\3'
@@ -21,7 +27,8 @@ end
     title: Faker::Lorem.word,
     description: Faker::Lorem.sentence,
     price: Faker::Number.decimal,
-    category_id: rand(1..5)
+    category_id: rand(1..6),
+    store_id: rand(1..10)
   )
 
   p.images.attach(io: URI.open("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/#{rand(1..100)}.png"), filename: "p-#{p.id}-image")

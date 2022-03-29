@@ -9,5 +9,7 @@ class CreateProducts < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+
+    add_reference :products, :store
   end
 end

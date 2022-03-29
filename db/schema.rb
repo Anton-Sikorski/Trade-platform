@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 2022_03_29_082336) do
     t.string "name", null: false
     t.string "value", null: false
     t.bigint "product_id", null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_features_on_category_id"
     t.index ["product_id"], name: "index_features_on_product_id"
   end
 

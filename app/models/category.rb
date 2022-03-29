@@ -12,6 +12,7 @@
 #
 class Category < ApplicationRecord
   has_many :products
+  has_many :features, dependent: :destroy
 
   validates :title, presence: true, uniqueness: true, length: { minimum: 2 }
   validates :description, presence: true, uniqueness: true, length: { minimum: 6 }

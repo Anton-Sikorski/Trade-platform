@@ -8,10 +8,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @products = @category.products.includes(:features, images_attachments: :blob)
-    @features = @products.map do |p|
-      p.features.map(&:name)
-    end.flatten.uniq
+    @products = @category.products.includes(images_attachments: :blob)
   end
 
   def new

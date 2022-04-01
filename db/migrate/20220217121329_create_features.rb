@@ -7,5 +7,7 @@ class CreateFeatures < ActiveRecord::Migration[6.1]
       t.string :value, null: false
       t.references :product, null: false, foreign_key: true
     end
+
+    add_reference :features, :category
   end
 end

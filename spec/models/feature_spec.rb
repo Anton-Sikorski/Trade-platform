@@ -4,14 +4,16 @@
 #
 # Table name: features
 #
-#  id         :bigint           not null, primary key
-#  name       :string           not null
-#  value      :string           not null
-#  product_id :bigint           not null
+#  id          :bigint           not null, primary key
+#  name        :string           not null
+#  value       :string           not null
+#  category_id :bigint
+#  product_id  :bigint           not null
 #
 # Indexes
 #
-#  index_features_on_product_id  (product_id)
+#  index_features_on_category_id  (category_id)
+#  index_features_on_product_id   (product_id)
 #
 # Foreign Keys
 #

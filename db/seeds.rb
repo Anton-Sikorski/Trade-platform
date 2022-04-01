@@ -33,7 +33,7 @@ end
 
   p.images.attach(io: URI.open("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/#{rand(1..100)}.png"), filename: "p-#{p.id}-image")
 
-  h.each_pair { |key, value| Feature.create(name: key, value: value, product_id: p.id) }
+  h.each_pair { |key, value| Feature.create(name: key, value: value, product_id: p.id, category_id: rand(1..6)) }
 end
 
 if Rails.env.development?

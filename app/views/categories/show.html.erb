@@ -5,9 +5,9 @@
 
 <div class="category-show">
   <div class="sidebar">
-    <% @features.each do |f| %>
+    <% @category.features.each do |f| %>
       <div class="sidebar-attribute">
-        <span><%= f.capitalize %></span>
+        <span><%= f.name.capitalize %></span>
       </div>
     <% end %>
     <hr>

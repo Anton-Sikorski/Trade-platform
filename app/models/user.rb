@@ -34,6 +34,10 @@ class User < ApplicationRecord
     ReadCache.redis.scard "cart#{id}"
   end
 
+  def cart_items
+    ReadCache.redis.smembers "cart#{id}"
+  end
+
   def default_avatar
     return if avatar.attached?
 

@@ -42,7 +42,7 @@ RSpec.describe CategoriesController, type: :controller do
     it "creates new categories" do
       post :create, params: { category: category_params }
 
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(:root)
       expect(response).to have_http_status(:found)
     end
 
@@ -71,7 +71,7 @@ RSpec.describe CategoriesController, type: :controller do
     it "updates categories" do
       put :update, params: { id: category.id, category: { title: "New title" } }
 
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(category_path(category))
       expect(response).to have_http_status(:found)
     end
 

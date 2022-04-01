@@ -1,0 +1,11 @@
+<%= form_with(model: store) do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+    <%== error_messages(store, :name) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "button" %>
+  </div>
+<% end %>

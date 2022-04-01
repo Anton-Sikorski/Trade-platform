@@ -11,10 +11,12 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  category_id :bigint           not null
+#  store_id    :bigint
 #
 # Indexes
 #
 #  index_products_on_category_id  (category_id)
+#  index_products_on_store_id     (store_id)
 #
 # Foreign Keys
 #
@@ -22,6 +24,7 @@
 #
 FactoryBot.define do
   factory :product do
+    store { FactoryBot.create(:store) }
     category { FactoryBot.create(:category) }
     title { Faker::Lorem.unique.words(number: 2).join(" ") }
     description { Faker::Lorem.sentence }

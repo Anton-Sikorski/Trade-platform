@@ -1,0 +1,34 @@
+<nav class="navigation-line">
+  <%= link_to 'Edit', edit_store_path(@store) %>
+  <%= link_to 'Back', stores_path %>
+</nav>
+
+<p>
+  <strong><%= @store.name.capitalize %> store</strong>
+</p>
+
+<% @store.products.each do |product| %>
+  <div class="product-card d-inline-flex">
+    <figure class="image">
+      <%= image_tag product.images.first.variant(resize: "100x100!") %>
+    </figure>
+
+    <div class="info">
+      <h4><%= link_to product.title.capitalize, category_product_path(product.category_id, product.id) %></h4>
+      <p class="description"><%= product.description %></p>
+    </div>
+
+    <div class="payment">
+      <% if signed_in? %>
+        <% if current_user.cart_items.any?(product.id.to_s) %>
+          <div>Already added to cart!</div>
+        <% else %>
+          <%= link_to "Add to cart", add_to_cart_path(product), class: "button add-to-cart", method: :put %>
+        <% end %>
+      <% else %>
+        <%= link_to "Add to cart", add_to_cart_path(product), class: "button add-to-cart", method: :put %>
+      <% end %>
+      <p><b><%= product.price %></b></p>
+    </div>
+  </div>
+<% end %>

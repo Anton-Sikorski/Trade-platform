@@ -28,7 +28,8 @@ RSpec.describe ProductsController, type: :controller do
 
   describe "POST #create" do
     let(:category) { create(:category) }
-    let(:product_params) { attributes_for(:product, category_id: category.id) }
+    let(:store) { create(:store) }
+    let(:product_params) { attributes_for(:product, store_id: store.id) }
 
     it "creates new products" do
       post :create, params: { category_id: category.id, product: product_params }

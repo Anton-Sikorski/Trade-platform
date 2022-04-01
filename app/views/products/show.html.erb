@@ -12,6 +12,7 @@
     <div class="info">
       <h4><%= @product.title.capitalize %></h4>
       <p class="description"><%= @product.description %></p>
+      <p><i><%= link_to @product.store.name, store_path(@product.store) %></i></p>
     </div>
   </div>
 

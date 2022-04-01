@@ -20,7 +20,6 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
-  before_create :default_avatar
   has_one_attached :avatar
   include ReadCache
 
@@ -36,12 +35,5 @@ class User < ApplicationRecord
 
   def cart_items
     ReadCache.redis.smembers "cart#{id}"
-  end
-
-  def default_avatar
-    return if avatar.attached?
-
-    avatar.attach(io: File.open("./lib/assets/user-default.jpeg"),
-                  filename: "default-avatar")
   end
 end

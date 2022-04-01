@@ -14,7 +14,11 @@
     </div>
 
     <div>
-      <%=image_tag current_user.avatar.variant(resize: "20x20!") %>
+      <% if current_user.avatar.attached? %>
+        <%=image_tag current_user.avatar.variant(resize: "20x20!") %>
+      <% else %>
+        <%=image_tag "user-default.jpeg", size: "20x20" %>
+      <% end %>
       <%=link_to current_user.name, edit_user_registration_path %>
       <%=link_to "Logout", destroy_user_session_path, method: :delete %>
     </div>

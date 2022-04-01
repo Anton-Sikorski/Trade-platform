@@ -80,19 +80,6 @@
 
 <script>
   $(document).ready(() => {
-
-      $('input[type="file"]').on('change', () => {
-          let srcArray = Array.from($('input[type="file"]').prop('files'))
-          console.log(typeof srcArray)
-          console.log(srcArray[1])
-
-        srcArray.forEach((src) => {
-          $('.product-images .image-container .slider').append($(
-              '<img class="image-preview" src=' + URL.createObjectURL(src) + '>'
-          ))
-        })
-      });
-
       let slideNow = 1;
       let translateWidth = 0;
       let slideCount = $('.slider').children().length;
